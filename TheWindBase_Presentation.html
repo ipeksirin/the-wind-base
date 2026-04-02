@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wind Base</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
+
+  :root {
+    --teal: #009DA4;
+    --teal-dark: #007A80;
+    --teal-light: #E6F7F8;
+    --black: #0D0D0D;
+    --gray-900: #1A1A1A;
+    --gray-700: #3D3D3D;
+    --gray-500: #6B6B6B;
+    --gray-300: #C4C4C4;
+    --gray-100: #F5F5F5;
+    --white: #FFFFFF;
+    --section-pad: 100px 60px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 50px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav-logo {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 58vh 42vh;
+    padding-top: 60px;
+  }
+  .hero-visual {
+    background: var(--teal);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-visual img.hero-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 60%;
+    opacity: 0.75;
+    mix-blend-mode: multiply;
+  }
+  .hero-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,157,164,0.3) 0%, rgba(0,80,90,0.6) 100%);
+  }
+  .hero-wave {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 80px;
+  }
+  .hero-badge {
+    position: absolute;
+    top: 36px;
+    right: 40px;
+    z-index: 2;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    padding: 8px 18px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+  }
+  .hero-text {
+    background: var(--white);
+    padding: 50px 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(52px, 7vw, 96px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--black);
+  }
+  .hero-sub {
+    margin-top: 18px;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--teal);
+    letter-spacing: 0.04em;
+  }
+  .hero-meta {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--gray-500);
+    letter-spacing: 0.06em;
+  }
+  .hero-scroll {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+  }
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--gray-300);
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: var(--section-pad); }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--black);
+  }
+  .section-sub {
+    margin-top: 14px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--gray-700);
+    max-width: 640px;
+  }
+  .divider {
+    width: 48px;
+    height: 3px;
+    background: var(--teal);
+    margin: 24px 0;
+  }
+
+  /* ─── STATEMENT ─── */
+  .statement {
+    background: var(--black);
+    padding: 90px 60px;
+    text-align: center;
+  }
+  .statement-quote {
+    font-size: clamp(22px, 3.5vw, 40px);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--white);
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .statement-quote em {
+    font-style: italic;
+    color: var(--teal);
+  }
+  .statement-note {
+    margin-top: 24px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--gray-300);
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── PILLARS ─── */
+  .pillars-section {
+    background: var(--white);
+    padding: 100px 60px;
+  }
+  .pillars-grid {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--gray-300);
+  }
+  .pillar {
+    background: var(--white);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .pillar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--teal);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.4s ease;
+  }
+  .pillar:hover::before { transform: scaleY(1); }
+  .pillar-number {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--teal-light);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .pillar h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 12px;
+  }
+  .pillar p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--gray-700);
+  }
+
+  /* ─── WHY SECTION ─── */
+  .why-section {
+    background: var(--gray-100);
+    padding: 100px 60px;
+  }
+  .why-grid {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+  .why-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .why-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--teal);
+    border-radius: 50%;
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+  .why-item h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 6px;
+  }
+  .why-item p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--gray-700);
+  }
+
+  /* ─── SYSTEM ─── */
+  .system-section {
+    padding: 100px 60px;
+    background: var(--white);
+  }
+  .system-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 60px;
+    align-items: start;
+  }
+  .system-description p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--gray-700);
+    margin-bottom: 20px;
+  }
+  .system-description strong { color: var(--black); }
+  .system-stat-row {
+    margin-top: 36px;
+    display: flex;
+    gap: 40px;
+  }
+  .system-stat { border-left: 3px solid var(--teal); padding-left: 16px; }
+  .system-stat .num {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1;
+  }
+  .system-stat .label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-500);
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+  .system-roles {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .role-group {
+    border: 1px solid var(--gray-100);
+    overflow: hidden;
+  }
+  .role-group-header {
+    background: var(--gray-100);
+    padding: 12px 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+  .role-item {
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--gray-100);
+    transition: background 0.2s;
+  }
+  .role-item:last-child { border-bottom: none; }
+  .role-item:hover { background: var(--teal-light); }
+  .role-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black);
+  }
+  .role-handle {
+    font-size: 12px;
+    color: var(--teal);
+    font-weight: 400;
+  }
+
+  /* ─── VALUE ─── */
+  .value-section {
+    background: #005F65;
+    padding: 100px 60px;
+  }
+  .value-section .section-label { color: rgba(255,255,255,0.6); }
+  .value-section .section-title { color: var(--white); }
+  .value-section .divider { background: rgba(255,255,255,0.4); }
+  .value-cards {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .value-card {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 36px 28px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .value-card:hover {
+    background: rgba(255,255,255,0.18);
+    transform: translateY(-4px);
+  }
+  .value-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+  .value-card h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+  .value-card p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.75);
+  }
+  .value-statement {
+    margin-top: 60px;
+    padding: 40px;
+    border: 1px solid rgba(255,255,255,0.3);
+    text-align: center;
+  }
+  .value-statement p {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.6;
+  }
+  .value-statement span {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* ─── PROGRAM ─── */
+  .program-section {
+    padding: 100px 60px;
+    background: var(--white);
+  }
+  .program-tabs {
+    margin-top: 52px;
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--gray-100);
+    margin-bottom: 52px;
+  }
+  .tab-btn {
+    padding: 14px 28px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--gray-500);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .tab-btn.active {
+    color: var(--teal);
+    border-bottom-color: var(--teal);
+  }
+  .tab-btn:hover { color: var(--teal); }
+  .day-content { display: none; }
+  .day-content.active { display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; align-items: center; }
+  .day-visual {
+    position: sticky;
+    top: 90px;
+  }
+  .day-visual-box {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .day-visual-box img.day-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+  .day-visual-box .gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.55) 100%);
+  }
+  .day-visual-label {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    color: white;
+    z-index: 1;
+  }
+  .day-visual-label .day-num {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .day-visual-label .day-loc {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-top: 4px;
+  }
+  .day-visual-label .day-theme {
+    font-size: 12px;
+    opacity: 0.7;
+    margin-top: 6px;
+    font-style: italic;
+  }
+  .day-schedule { }
+  .schedule-item {
+    display: flex;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--gray-100);
+    transition: background 0.2s;
+  }
+  .schedule-item:first-child { padding-top: 0; }
+  .schedule-item:last-child { border-bottom: none; }
+  .schedule-time {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--teal);
+    min-width: 44px;
+    padding-top: 2px;
+  }
+  .schedule-bar {
+    width: 2px;
+    background: var(--teal);
+    opacity: 0.25;
+    flex-shrink: 0;
+    margin: 4px 0;
+  }
+  .schedule-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--gray-900);
+    font-weight: 400;
+  }
+  .day-tbd {
+    text-align: center;
+    padding: 80px 40px;
+    color: var(--gray-500);
+    border: 2px dashed var(--gray-300);
+  }
+  .day-tbd .tbd-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+  .day-tbd h3 {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 10px;
+  }
+  .day-tbd p {
+    font-size: 14px;
+    color: var(--gray-500);
+  }
+
+  /* ─── TONE ─── */
+  .tone-section {
+    background: var(--gray-100);
+    padding: 100px 60px;
+  }
+  .tone-grid {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .tone-card {
+    padding: 36px 28px;
+    background: var(--white);
+    border-top: 3px solid var(--teal);
+    transition: transform 0.2s;
+  }
+  .tone-card:hover { transform: translateY(-4px); }
+  .tone-word {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 10px;
+  }
+  .tone-desc {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--gray-700);
+  }
+
+  /* ─── PARTNERS ─── */
+  .partners-section {
+    padding: 100px 60px;
+    background: var(--white);
+  }
+  .partners-grid {
+    margin-top: 52px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .partner-card {
+    padding: 36px 32px;
+    border: 1px solid var(--gray-100);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .partner-card:hover {
+    border-color: var(--teal);
+    box-shadow: 0 8px 40px rgba(0,157,164,0.1);
+  }
+  .partner-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+  .partner-name {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+  .partner-desc {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--gray-700);
+  }
+
+  /* ─── CLOSE ─── */
+  .close-section {
+    background: var(--black);
+    padding: 120px 60px;
+    text-align: center;
+  }
+  .close-tagline {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.2;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .close-tagline em {
+    font-style: normal;
+    color: var(--teal);
+  }
+  .close-sub {
+    margin-top: 24px;
+    font-size: 16px;
+    color: var(--gray-300);
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+  .close-name {
+    margin-top: 48px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.08em;
+  }
+  .close-role {
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--teal);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .close-divider {
+    width: 48px;
+    height: 1px;
+    background: var(--teal);
+    margin: 28px auto;
+  }
+  .close-footer {
+    font-size: 11px;
+    color: var(--gray-500);
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
+  .delay-4 { transition-delay: 0.4s; }
+
+  /* ─── DAY 1 VISUAL ─── */
+  .d1-bg { background: linear-gradient(160deg, #57C8CC 0%, #009DA4 50%, #005E65 100%); }
+  .d2-bg { background: linear-gradient(160deg, #1A6B8A 0%, #0F4A6B 50%, #0A2E45 100%); }
+  .d3-bg { background: linear-gradient(160deg, #7B5EA7 0%, #5D3D8C 50%, #3A2060 100%); }
+  .d4-bg { background: linear-gradient(160deg, #E8724A 0%, #C0522A 50%, #8B3515 100%); }
+
+  /* floating dots decoration */
+  .hero-visual .dots {
+    position: absolute;
+    top: 40px; left: 40px;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 10px;
+    opacity: 0.2;
+    z-index: 1;
+  }
+  .hero-visual .dot {
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 14px 24px; }
+    .nav-links { display: none; }
+    section, .pillars-section, .why-section, .system-section, .value-section,
+    .program-section, .tone-section, .partners-section, .close-section, .statement {
+      padding: 70px 24px;
+    }
+    .hero-text { padding: 36px 24px; }
+    .pillars-grid, .value-cards, .tone-grid, .partners-grid { grid-template-columns: 1fr; }
+    .why-grid, .system-layout { grid-template-columns: 1fr; gap: 40px; }
+    .day-content.active { grid-template-columns: 1fr; }
+    .day-visual { position: static; }
+    .system-stat-row { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">THE WIND BASE</div>
+  <ul class="nav-links">
+    <li><a href="#platform">Platform</a></li>
+    <li><a href="#sistem">Sistem</a></li>
+    <li><a href="#program">Program</a></li>
+    <li><a href="#marka">Marka</a></li>
+    <li><a href="#ekip">Ekip</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-visual d1-bg">
+    <img class="hero-photo" src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1400&auto=format&fit=crop&q=80" alt="Kite surfing" onerror="this.style.display='none'">
+    <div class="dots">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <div class="hero-badge">Kraft Kollektif Prodüksiyon · Nisan–Mayıs</div>
+    <svg class="hero-wave" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 80 C360 0 1080 80 1440 20 L1440 80 Z" fill="white"/>
+    </svg>
+  </div>
+  <div class="hero-text">
+    <div class="hero-eyebrow">Türkiye'nin İlk MULTI-SCHOOL WIND Platformu</div>
+    <h1>THE WIND BASE</h1>
+    <div class="hero-sub">Kite · Wing · Gastro — Göcek'ten Ölüdeniz'e 4 Gün</div>
+    <div class="hero-meta">Ege boyunca hareket eden · Performans · Keşif · Topluluk</div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Keşfet
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<div class="statement">
+  <div class="statement-quote fade-up">
+    <span style="display:block;">Bu bir etkinlik değil.</span>
+    <span style="display:block; margin-top:0.3em;">Bu, <em>Türkiye'de başlayıp bölgesel ölçekte büyüyecek</em> bir rüzgâr kültürü platformudur.</span>
+  </div>
+  <div class="statement-note fade-up delay-1">— Buse İnceler, Founder · The Wind Base</div>
+</div>
+
+<!-- PLATFORM -->
+<section class="pillars-section" id="platform">
+  <div class="section-label">Platform Nedir?</div>
+  <div class="section-title fade-up">Üç Dünyayı<br>Tek Çatıda Birleştiriyoruz</div>
+  <div class="section-sub fade-up delay-1">Rüzgâr sporları büyüyor ama yapı dağınık. Okullar ayrı, deneyimler ayrı, içerik üretimi ayrı ilerliyor. The Wind Base bu parçalı yapıyı tek bir mobil platformda birleştirir.</div>
+  <div class="divider"></div>
+  <div class="pillars-grid fade-up delay-2">
+    <div class="pillar">
+      <div class="pillar-number">01</div>
+      <h3>Kite</h3>
+      <p>Kite Gang Corner (Akyaka) iş birliğiyle kiteboarding deneyimi. Başlangıç seviyesinden ileri seviyelere kadar ayrıştırılmış eğitim seansları, açık deniz termal rüzgarda gerçek performans.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-number">02</div>
+      <h3>Wing & Yelken</h3>
+      <p>Sun Surf Alaçatı ortaklığıyla wing foil ve yelkenli deneyimi. Ege boyunca hareket eden, rüzgârı takip eden mobil bir performans yapısı.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-number">03</div>
+      <h3>Gastro</h3>
+      <p>Serra İleri (Papazz Alaçatı kurucusu) imzasıyla tekne üzeri yemek deneyimi. Her öğün bir içerik seti. F&B ve deniz kültürünün kesişimi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why-section" id="neden">
+  <div class="section-label">Neden Var?</div>
+  <div class="section-title fade-up">Neden Şimdi,<br>Neden Bu Platform?</div>
+  <div class="divider"></div>
+  <div class="why-grid">
+    <div class="why-item fade-up delay-1">
+      <div class="why-dot"></div>
+      <div>
+        <h4>Rüzgâr sporları hızla büyüyor</h4>
+        <p>Küresel ölçekte kite ve wing disiplinlerine ilgi artıyor. Türkiye bu büyümenin merkezinde yer alacak potansiyele sahip.</p>
+      </div>
+    </div>
+    <div class="why-item fade-up delay-2">
+      <div class="why-dot"></div>
+      <div>
+        <h4>Ege yeterince konumlanmamış</h4>
+        <p>Global ölçekte Ege bölgesi wind sports destinasyonu olarak hâlâ yeterince görünür değil. The Wind Base bu boşluğu dolduruyor.</p>
+      </div>
+    </div>
+    <div class="why-item fade-up delay-3">
+      <div class="why-dot"></div>
+      <div>
+        <h4>Topluluk yapıları daha fazla etkileşim yaratıyor</h4>
+        <p>Deneyim odaklı, kürate edilmiş topluluklar tek seferlik etkinliklere kıyasla çok daha yüksek organik etkileşim ve bağlılık üretiyor.</p>
+      </div>
+    </div>
+    <div class="why-item fade-up delay-4">
+      <div class="why-dot"></div>
+      <div>
+        <h4>Markalar hikâyenin parçası olmak istiyor</h4>
+        <p>Görünürlük satın almanın ötesine geçen markalar artık anlam ve deneyim arıyor. The Wind Base tam da bu noktayı karşılıyor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SISTEM -->
+<section class="system-section" id="sistem">
+  <div class="section-label">Nasıl Çalışır?</div>
+  <div class="section-title fade-up">18 Kişilik<br>Entegre Sistem</div>
+  <div class="divider"></div>
+  <div class="system-layout">
+    <div class="system-description fade-up delay-1">
+      <p>Merkezde <strong>bir yelkenli tekne</strong> bulunur — mobil base. Kite Gang (Akyaka) kite tarafını, Sun Surf Alaçatı wing ve yelken tarafını temsil eder. Platform <strong>Ege boyunca hareket eder.</strong></p>
+      <p>Bu 18 kişi rastgele bir topluluk değil; sistemin birbiriyle bağlı parçalarıdır. Liderlik, spor, üretim, deneyim ve topluluk katmanları tek bir yapı altında entegre çalışır.</p>
+      <p>Platform tekrar edebilen, ölçeklenebilir ve Türkiye'den başlayıp bölgesel ölçekte büyüyecek şekilde tasarlanmıştır.</p>
+      <div class="system-stat-row">
+        <div class="system-stat">
+          <div class="num">18</div>
+          <div class="label">Kişilik Sistem</div>
+        </div>
+        <div class="system-stat">
+          <div class="num">4</div>
+          <div class="label">Günlük Program</div>
+        </div>
+        <div class="system-stat">
+          <div class="num">3</div>
+          <div class="label">Disiplin</div>
+        </div>
+      </div>
+    </div>
+    <div class="system-roles fade-up delay-2">
+      <div class="role-group">
+        <div class="role-group-header">Liderlik</div>
+        <div class="role-item">
+          <span class="role-name">Buse İnceler</span>
+          <span class="role-handle">Founder & Skipper</span>
+        </div>
+      </div>
+      <div class="role-group">
+        <div class="role-group-header">Spor Partnerleri</div>
+        <div class="role-item">
+          <span class="role-name">Yunus Şeker</span>
+          <span class="role-handle">Kite Gang Corner</span>
+        </div>
+        <div class="role-item">
+          <span class="role-name">Sun Surf Alaçatı</span>
+          <span class="role-handle">Wing & Yelken</span>
+        </div>
+      </div>
+      <div class="role-group">
+        <div class="role-group-header">Prodüksiyon & Yaratıcı</div>
+        <div class="role-item">
+          <span class="role-name">Yunus Sönmezay</span>
+          <span class="role-handle">@yunussonmezay</span>
+        </div>
+        <div class="role-item">
+          <span class="role-name">Tünel Kolektif</span>
+          <span class="role-handle">@tunelkolektif</span>
+        </div>
+        <div class="role-item">
+          <span class="role-name">Drone & Aerial</span>
+          <span class="role-handle">Ekip</span>
+        </div>
+      </div>
+      <div class="role-group">
+        <div class="role-group-header">Deneyim & F&B</div>
+        <div class="role-item">
+          <span class="role-name">Serra İleri</span>
+          <span class="role-handle">@serraileri · @papazzalacati</span>
+        </div>
+      </div>
+      <div class="role-group">
+        <div class="role-group-header">Pazarlama & Topluluk</div>
+        <div class="role-item">
+          <span class="role-name">Merve Atamer</span>
+          <span class="role-handle">@merimusika · @gastro.fun.club</span>
+        </div>
+      </div>
+      <div class="role-group">
+        <div class="role-group-header">Topluluk</div>
+        <div class="role-item">
+          <span class="role-name">Kürate Katılımcılar</span>
+          <span class="role-handle">MasterChef görüşmeleri devam ediyor</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKA DEĞERİ -->
+<section class="value-section" id="marka">
+  <div class="section-label">Marka İçin Değer</div>
+  <div class="section-title fade-up">Reklam Vermiyorsunuz.<br>Hikâyenin Parçası Oluyorsunuz.</div>
+  <div class="divider"></div>
+  <div class="value-cards">
+    <div class="value-card fade-up delay-1">
+      <div class="value-icon">🎬</div>
+      <h4>İçerik Üretimi & Marka Entegrasyonu</h4>
+      <p>Yüksek prodüksiyonlu içerikler doğrudan platformun parçası. Marka doğal bağlamda görünür.</p>
+    </div>
+    <div class="value-card fade-up delay-2">
+      <div class="value-icon">✦</div>
+      <h4>Premium Görünürlük</h4>
+      <p>Sahada ve içeriklerde; drone görüntüleri, güverte sahneleri, F&B entegrasyonu ile eşsiz görsel dil.</p>
+    </div>
+    <div class="value-card fade-up delay-3">
+      <div class="value-icon">◎</div>
+      <h4>Kürate Kitleye Erişim</h4>
+      <p>Seçilmiş, meşgul, gerçek ilgi sahibi bir topluluğa doğrudan ulaşım. Kitlesel değil, kaliteli erişim.</p>
+    </div>
+    <div class="value-card fade-up delay-4">
+      <div class="value-icon">∞</div>
+      <h4>Uzun Vadeli Konumlandırma</h4>
+      <p>Tek sezonluk değil. Büyüyen bir platformla birlikte ölçeklenen kalıcı bir marka pozisyonu.</p>
+    </div>
+  </div>
+  <div class="value-statement fade-up">
+    <p>"Markalar bu platformda reklam vermez.<br>Deneyimin ve hikâyenin parçası olur."</p>
+    <span>Bu daha güçlü ve organik bir bağ yaratır.</span>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section class="program-section" id="program">
+  <div class="section-label">4 Günlük Program</div>
+  <div class="section-title fade-up">Göcek'ten Ölüdeniz'e</div>
+  <div class="section-sub fade-up delay-1">Kraft Kollektif Prodüksiyon · Nisan–Mayıs</div>
+  <div class="divider"></div>
+
+  <div class="program-tabs">
+    <button class="tab-btn active" onclick="showDay('day1',this)">Gün 1</button>
+    <button class="tab-btn" onclick="showDay('day2',this)">Gün 2</button>
+    <button class="tab-btn" onclick="showDay('day3',this)">Gün 3</button>
+    <button class="tab-btn" onclick="showDay('day4',this)">Gün 4</button>
+  </div>
+
+  <!-- DAY 1 -->
+  <div class="day-content active" id="day1">
+    <div class="day-visual">
+      <div class="day-visual-box d1-bg">
+        <img class="day-photo" src="day1_photo.jpg" alt="Göcek — Dış Göbün">
+        <div class="gradient-overlay"></div>
+        <div class="day-visual-label">
+          <div class="day-num">Gün 1</div>
+          <div class="day-loc">Göcek → Dış Göbün</div>
+          <div class="day-theme">Açılış · Lansman Çekimi · Açık Deniz Kite</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-schedule">
+      <div class="schedule-item">
+        <div class="schedule-time">10:00</div>
+        <div class="schedule-bar"></div>
+        <div class="schedule-text">Göcek marinasında check-in & ekip tanışması</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">11:00</div>
+        <div class="schedule-bar"></div>
+        <div class="schedule-text">Lansman çekimi — güverte, drone, sponsor görünürlüğü</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">12:30</div>
+        <div class="schedule-bar"></div>
+        <div class="schedule-text">Serra imzalı karşılama öğle yemeği & F&B içerik seti</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">14:00</div>
+        <div class="schedule-bar"></div>
+        <div class="schedule-text">Dış Göbün'e yelken — açık deniz termal rüzgar</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">16:00</div>
+        <div class="schedule-bar"></div>
+        <div class="schedule-text">Açık deniz kite seansı — termal koşullarda serbest sürüş</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">17:30</div>
+        <div class="schedule-bar"></div>
+        <div class="schedule-text">Drone çekimi: ekipman, marka, hareket</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">19:30</div>
+        <div class="schedule-bar"></div>
+        <div class="schedule-text">Güneş batımı kokteyli & gece demir</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-content" id="day2">
+    <div class="day-visual">
+      <div class="day-visual-box d2-bg">
+        <img class="day-photo" src="day2_photo.jpg" alt="Darboğaz — Antik Gemiler">
+        <div class="gradient-overlay"></div>
+        <div class="day-visual-label">
+          <div class="day-num">Gün 2</div>
+          <div class="day-loc">Göbün → Darboğaz → Antik Gemiler</div>
+          <div class="day-theme">Drama & Derinlik · Konvoy Geçişi · Sualtı Sahnesi</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-schedule">
+      <div class="schedule-item">
+        <div class="schedule-time">07:30</div>
+        <div class="schedule-bar"></div>
+        <div class="schedule-text">Tekne kahvaltısı — Serra konsepti, Türk sofra sahnesi</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">09:00</div>
+        <div class="schedule-bar"></div>
+        <div class="schedule-text">Darboğaz'a geçiş — iki tekne konvoy, dramatik drone</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">10:00</div>
+        <div class="schedule-bar"></div>
+        <div class="schedule-text">Kite & wing eğitim seansları, beginner–ileri ayrımı</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">12:00</div>
+        <div class="schedule-bar"></div>
+        <div class="schedule-text">Antik gemiler bölgesinde demir — sualtı çekim sahnesi</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">13:30</div>
+        <div class="schedule-bar"></div>
+        <div class="schedule-text">Tekne üzeri öğle & sponsor ürün entegrasyonu</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">15:00</div>
+        <div class="schedule-bar"></div>
+        <div class="schedule-text">Serbest su zamanı: demo & değiş-tokuş seansları</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">19:00</div>
+        <div class="schedule-bar"></div>
+        <div class="schedule-text">Akşam yemeği deneyimi — tekne üzeri restoran sahnesi</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-content" id="day3">
+    <div class="day-visual">
+      <div class="day-visual-box d3-bg">
+        <div class="gradient-overlay"></div>
+        <div class="day-visual-label">
+          <div class="day-num">Gün 3</div>
+          <div class="day-loc">Ölüdeniz'e Doğru</div>
+          <div class="day-theme">Yakında Paylaşılacak</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-tbd">
+      <div class="tbd-label">Gün 3 Programı</div>
+      <h3>Yakında Paylaşılacak</h3>
+      <p>Bu bölümün içeriği hazırlanmakta olup en kısa sürede güncellenecektir.</p>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-content" id="day4">
+    <div class="day-visual">
+      <div class="day-visual-box d4-bg">
+        <div class="gradient-overlay"></div>
+        <div class="day-visual-label">
+          <div class="day-num">Gün 4</div>
+          <div class="day-loc">Ölüdeniz — Kapanış</div>
+          <div class="day-theme">Yakında Paylaşılacak</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-tbd">
+      <div class="tbd-label">Gün 4 Programı</div>
+      <h3>Yakında Paylaşılacak</h3>
+      <p>Bu bölümün içeriği hazırlanmakta olup en kısa sürede güncellenecektir.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- PARTNERS -->
+<section class="partners-section" id="ekip">
+  <div class="section-label">Stratejik Ortaklar</div>
+  <div class="section-title fade-up">Ekosistemi Oluşturanlar</div>
+  <div class="divider"></div>
+  <div class="partners-grid">
+    <div class="partner-card fade-up delay-1">
+      <div class="partner-tag">KITE SCHOOL PARTNER</div>
+      <div class="partner-name">Kite Gang Corner</div>
+      <div class="partner-desc">Akyaka merkezli kite okulu. Yunus Şeker liderliğinde, başlangıçtan ileri seviyelere kadar ayrıştırılmış eğitim altyapısı ile platformun kite tarafını temsil ediyor.</div>
+    </div>
+    <div class="partner-card fade-up delay-2">
+      <div class="partner-tag">WING & SAILING PARTNER</div>
+      <div class="partner-name">Sun Surf Alaçatı</div>
+      <div class="partner-desc">Wing foil ve yelken alanlarında Ege'nin öne çıkan okullarından biri. Platformun deniz ve yelken deneyimini yönetiyor.</div>
+    </div>
+    <div class="partner-card fade-up delay-3">
+      <div class="partner-tag">F&B Deneyim</div>
+      <div class="partner-name">Serra İleri</div>
+      <div class="partner-desc">Papazz Alaçatı kurucusu. @serraileri imzasıyla tüm yemek sahnelerini ve F&B içerik setlerini tasarlıyor. Gastronomi ve deniz kültürünün kesişim noktası.</div>
+    </div>
+    <div class="partner-card fade-up delay-1">
+      <div class="partner-tag">PRODUCTION & CREATIVE</div>
+      <div class="partner-name">Yunus Sönmezay · Tünel Kolektif</div>
+      <div class="partner-desc">@yunussonmezay ve @tunelkolektif imzasıyla yüksek prodüksiyon içerik üretimi. Platform boyunca tüm görsel anlatıyı yönetiyorlar.</div>
+    </div>
+    <div class="partner-card fade-up delay-2">
+      <div class="partner-tag">MARKETING & COMMUNITY</div>
+      <div class="partner-name">Merve Atamer</div>
+      <div class="partner-desc">@merimusika ve @gastro.fun.club hesaplarıyla topluluk yönetimi ve pazarlama iletişimi. Kürate kitleyle köprü kuruyor.</div>
+    </div>
+    <div class="partner-card fade-up delay-3">
+      <div class="partner-tag">Tekne Partner</div>
+      <div class="partner-name">EGG Yachting</div>
+      <div class="partner-desc">Platformun mobil üssü olan yelkenli tekneyi sağlayan stratejik partner. Ege boyunca hareket eden deneyim merkezinin taşıyıcısı.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close-section">
+  <div class="close-tagline fade-up">
+    Bu bir proje değil.<br>
+    Bu bir event değil.<br>
+    Bu bir <em>platform</em>.
+  </div>
+  <div class="close-sub fade-up delay-1">
+    Türkiye'de başlayıp bölgesel ölçekte büyüyecek bir rüzgâr kültürü ekosistemi. Sınırlı sayıda stratejik marka partneriyle kuruluş aşamasında ilerliyoruz.
+  </div>
+  <div class="close-divider"></div>
+  <div class="close-name fade-up delay-2">Buse İNCELER</div>
+  <div class="close-role">FOUNDER — THE WIND BASE</div>
+  <div style="margin-top:48px;" class="fade-up delay-3">
+    <div class="close-footer">Kraft Kollektif Prodüksiyon · Nisan–Mayıs · Göcek → Ölüdeniz</div>
+  </div>
+</section>
+
+<script>
+  // Tab switching
+  function showDay(id, btn) {
+    document.querySelectorAll('.day-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Intersection observer for fade-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
